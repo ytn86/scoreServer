@@ -1,0 +1,215 @@
+TRACE 2017/05/16 03:23:16 run.go:120: Base path: /home/ytn/go/src/github.com/ytn86/scoreServer
+TRACE 2017/05/16 03:23:16 run.go:124: Running in watched mode.
+TRACE 2017/05/16 03:23:16 template.go:198: Refreshing templates from [/home/ytn/go/src/github.com/revel/revel/templates]
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/403.html
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/403.json
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/403.txt
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/403.xml
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/404-dev.html
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/404.html
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/404.json
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/404.txt
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/404.xml
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/405.html
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/405.json
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/405.txt
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/405.xml
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/500-dev.html
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/500.html
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/500.json
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/500.txt
+TRACE 2017/05/16 03:23:16 template.go:256: adding template:  errors/500.xml
+TRACE 2017/05/16 03:23:18 harness.go:132: Rebuild
+TRACE 2017/05/16 03:23:19 build.go:111: Exec: [/usr/bin/go build -i -ldflags -X github.com/ytn86/scoreServer/app.AppVersion= -X github.com/ytn86/scoreServer/app.BuildTime=2017-05-15T18:23:19Z -tags  -o /home/ytn/go/bin/revel.d/github.com/ytn86/scoreServer/scoreServer github.com/ytn86/scoreServer/app/tmp]
+TRACE 2017/05/16 03:23:21 app.go:63: Exec app: /home/ytn/go/bin/revel.d/github.com/ytn86/scoreServer/scoreServer [/home/ytn/go/bin/revel.d/github.com/ytn86/scoreServer/scoreServer -port=41007 -importPath=github.com/ytn86/scoreServer -runMode=dev]
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: DBController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: Static
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: TestRunner
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: App
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: APIv1AccountController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: APIv1TaskController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: Admin_APIv1GenreController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: ScoreController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: Admin_TaskController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: GenreController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: AccountController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: APIv1ScoreController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: APIv1GenreController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: Admin_APIv1TaskController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: RuleController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: Admin_GenreController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: TaskController
+TRACE 2017/05/16 03:23:21 controller.go:416: Registered controller: Admin_RuleController
+TRACE 2017/05/16 03:23:21 i18n.go:127: Importing messages from module: github.com/revel/modules/static
+TRACE 2017/05/16 03:23:21 i18n.go:127: Importing messages from module: github.com/revel/modules/testrunner
+TRACE 2017/05/16 03:23:21 i18n.go:164: Successfully loaded messages from file sample.en
+TRACE 2017/05/16 03:23:21 template.go:198: Refreshing templates from [/home/ytn/go/src/github.com/ytn86/scoreServer/app/views /home/ytn/go/src/github.com/revel/revel/templates /home/ytn/go/src/github.com/revel/modules/testrunner/app/views]
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  #admin_head.html#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/#Login.html#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/#User.html#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/Login.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/Login.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/Register.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/User.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_GenreController/ViewGenres.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_GenreController/ViewGenres.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_RuleController/ViewRule.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_RuleController/ViewRule.html.old
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_RuleController/ViewRule.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/AddTask.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/ViewTasks.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/ViewTasks.html2
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/ViewTasks.html_maybug
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/ViewTasks.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  App/Index.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  App/Index.html_
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  RuleController/GetRule.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  RuleController/GetRule.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/GetAllScores.html.old
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/GetAllScores.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/GetScores.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/ViewTop100Users.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/ViewTop100Users.html_
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/ViewTop100Users.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/#ViewTasks.html2#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/#v#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/GetAllTasks.html.old
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/GetAllTasks.html_
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/ViewTasks.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/ViewTasks.html2
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/ViewTasks.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  admin_head.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  admin_nav.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  body_common.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  debug.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  flash.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  footer.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  head.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  head.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  header.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  index.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  nav.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  nav.html.old
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  nav.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/403.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/403.json
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/403.txt
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/403.xml
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404-dev.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.json
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.txt
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.xml
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/405.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/405.json
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/405.txt
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/405.xml
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500-dev.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.json
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.txt
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.xml
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TestRunner/FailureDetail.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TestRunner/Index.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TestRunner/SuiteResult.html
+TRACE 2017/05/16 03:23:21 template.go:198: Refreshing templates from [/home/ytn/go/src/github.com/ytn86/scoreServer/app/views /home/ytn/go/src/github.com/revel/revel/templates /home/ytn/go/src/github.com/revel/modules/testrunner/app/views]
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  #admin_head.html#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/#Login.html#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/#User.html#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/Login.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/Login.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/Register.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  AccountController/User.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_GenreController/ViewGenres.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_GenreController/ViewGenres.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_RuleController/ViewRule.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_RuleController/ViewRule.html.old
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_RuleController/ViewRule.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/AddTask.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/ViewTasks.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/ViewTasks.html2
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/ViewTasks.html_maybug
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  Admin_TaskController/ViewTasks.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  App/Index.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  App/Index.html_
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  RuleController/GetRule.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  RuleController/GetRule.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/GetAllScores.html.old
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/GetAllScores.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/GetScores.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/ViewTop100Users.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/ViewTop100Users.html_
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  ScoreController/ViewTop100Users.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/#ViewTasks.html2#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/#v#
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/GetAllTasks.html.old
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/GetAllTasks.html_
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/ViewTasks.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/ViewTasks.html2
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TaskController/ViewTasks.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  admin_head.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  admin_nav.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  body_common.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  debug.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  flash.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  footer.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  head.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  head.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  header.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  index.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  nav.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  nav.html.old
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  nav.html~
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/403.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/403.json
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/403.txt
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/403.xml
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404-dev.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.json
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.txt
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/404.xml
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/405.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/405.json
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/405.txt
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/405.xml
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500-dev.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.json
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.txt
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  errors/500.xml
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TestRunner/FailureDetail.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TestRunner/Index.html
+TRACE 2017/05/16 03:23:21 template.go:256: adding template:  TestRunner/SuiteResult.html
+TRACE 2017/05/16 03:23:21 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:21 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:21 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:22 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:22 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:22 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:23 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:23 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:23 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:23 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:23 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:23 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:23 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:23 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:23 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:23 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:23 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:23 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:24 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:24 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:24 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:25 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:25 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:25 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:25 csrf.go:38: REVEL-CSRF: Session's token: 'NPY5SCvJTJWjo3YlQyZHOeLnB2J632X5JWivf8RUnJ4='
+TRACE 2017/05/16 03:23:25 csrf.go:55: REVEL-CSRF: Processing unsafe 'POST' method...
+TRACE 2017/05/16 03:23:25 csrf.go:83: REVEL-CSRF: Token received from client: ''
+TRACE 2017/05/16 03:23:29 app.go:95: Killing revel server pid 1558

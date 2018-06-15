@@ -1,0 +1,154 @@
+<html>
+	{{ template "head.html" .}}
+	<body>
+		<header>
+			{{ template "nav.html" .}}
+		</header>
+		<div class="container">
+			<h5> Top 100 </h5>
+
+			<table class="striped atranking-table">
+				<thead>
+					<tr>
+						<th>Rank</th>
+						<th>Name</th>
+						<th>Score</th>
+						<th>Comment</th>
+						<th>Last Solved</th>
+					</tr>
+				</thead>
+				<tbody id="table-score-body">
+				</tbody>
+			</table>					
+		</div>
+
+		<div id="modal1" class="modal">
+			<div class="container">
+				<div class="row">
+					<h5>Profile</h5>
+					<div id="profile">
+						<div class="col s10">
+							<div class="col s4">Username</div>
+							<div id="username" class="col s4"></div>
+						</div>
+						<div class="col s10">
+							<div class="col s4">Univ. Tsukuba?</div>
+							<div id="is_itf" class="col s4"></div>
+						</div>
+						<div class="col s10">
+							<div class="col s4">Score</div>
+							<div id="score" class="col s4"></div>
+						</div>
+						<div class="col s10">
+							<div class="col s4">Comment</div>
+							<div id="comment" class="col s6"></div>
+						</div>
+						<input id="input-userid" type="hidden"> 
+				</div>
+				</div>
+				<div class="row">
+					<h5>Solved</h5>
+					<table id="table-solves" class="bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Point</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody id="table-solves-body">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		
+		<script>
+		 $(window).load(function() {
+			 $.get('/api/v1/scores', function(json) {
+				 
+				 if (json.status == 200) {
+
+					 data = json.data;
+					 $.each(data, function(i) {
+						 user = data[i]
+
+
+						 
+						 tr = $('<tr>').attr('id', 'user'+user.id);
+						 $('<td>').addClass('rank').text((user.rank)).appendTo(tr);
+						 $('<td>').addClass('name').text(user.name).appendTo(tr);
+						 $('<td>').addClass('point').text(user.point).appendTo(tr);
+						 $('<td>').addClass('comment').text(user.comment).appendTo(tr);
+						 $('<td>').addClass('last_solved').text(dateToString(user.last_solved_at)).appendTo(tr);
+						 $('#table-score-body').append(tr);
+						 
+					 });
+				 }
+
+				 
+			 });
+			 
+			 
+			 $('#modal1').modal();
+			 $(document).on('click', '#table-score-body tr', function() {
+				 var userID=$(this).attr('id').replace(/[^-^0-9^'.]/g, '');
+				 var url1 = '/api/v1/user/solves/' + userID;
+				 var url2 = '/api/v1/user/profile/' + userID;
+
+				 
+				 $('#table-solves-body').empty();
+				 				 
+
+				 
+				 $.get(url1, function(json) {
+					 if (json["status"] == 200) {
+						 var list = json["data"]
+						 if (list != null) {
+							 $.each(list, function(i) {
+								 var item = list[i];
+								 var tr = $('<tr>');
+								 $('<td>').text(item.taskid).appendTo(tr);
+								 $('<td>').text(item.title).appendTo(tr);
+								 $('<td>').text(item.point).appendTo(tr);
+								 $('<td>').text(dateToString(item.solved_at)).appendTo(tr);
+								 $('#table-solves-body').append(tr);
+							 })
+						 }
+					 }
+				 });
+				 
+
+				 
+				 $.get(url2, function(json) {
+					 if (json["status"] == 200) {
+						 var profile = json["data"];
+						 $('#username').text(profile.name);
+						 $('#email').text(profile.email);
+						 if (profile.is_itf == true) {
+							 $('#is_itf').text('yes');
+						 } else {
+							 $('#is_itf').text('no');
+						 }
+						 $('#score').text(profile.score + ' pt');
+						 $('#comment').text(profile.comment);
+						 
+						 
+					 
+					 }
+				 });
+			
+			 
+				 $('#modal1').modal('open');
+				 	 
+			 });
+		 });
+
+				 
+		 
+		</script>
+		{{ template "body_common.html" .}}
+	</body>
+</html>

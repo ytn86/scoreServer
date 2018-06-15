@@ -1,0 +1,157 @@
+
+
+body {
+	background-color: #f5f5f5; !important;
+}
+	
+nav {
+	background-color: #32cd32; !important
+}
+
+.container {
+	margin-top: 20px; !important
+	padding-top: 20px; !important
+}
+
+.container h5{
+	margin: 10px; !important
+}
+
+.ranking-table {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.side-nav {
+	width: 25%; !important
+}
+
+.row {
+	margin: auto, auto; !important;
+	padding: auto, auto; !important;
+}
+
+#msg {
+	color: red;
+}
+
+
+.login-form{
+	margin-top: 20px; !important
+}
+
+
+.grid-tasks {
+	margin: 10px; !important;
+	text-align: center;	
+}
+
+.point {
+	font-size:20px;
+}
+
+.title {
+	font-size: 26px;
+}
+
+.grid-tasks-web {
+	background-color: #7fffd4;
+
+}
+
+.grid-tasks-pwn {
+	background-color: #ffc000;
+}
+
+.grid-tasks-misc {
+	background-color: #b7b7ff;
+}
+
+.grid-tasks-crypto {
+	background-color: #ffd700;
+}
+
+.task-btn {
+	background-color: #f5f5f5; !important;
+	margin-left: 80%;
+	color: #000000;
+}
+.task-btn:hover {
+	background-color: #f5f5f5; !important;
+}
+
+
+#table-solved {
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+}
+	
+table.striped>tbody>tr:nth-child(odd) {
+    background-color: #f3f3f3; !important;
+}
+
+table.striped>tbody>tr {
+	background-color: #dfdfdf; !important;
+}
+
+#profile {
+	margin-right: 20%;
+	margin-left: 5%;
+}
+
+#table-solves {
+	margin-right: 5%;
+	margin-left: 5%;
+}
+
+#rule {
+	float: left;
+	width: 47%;
+}
+
+#tabs-markdown {
+	height: 900px;
+}
+
+#tabs-html {
+	height: 900px;
+}
+
+#tabs-rule {
+	width: 98%;
+	margin-left: 4%;
+}
+
+#input-rule-markdown {
+	margin-top: 20px;
+	overflow: auto;
+	margin-left: 3%;
+	word-wrap: break-word;
+	background-color: #ffffff;
+	resize: none;
+	height: 95%;
+	width: 100%;
+}
+
+#input-rule-html {
+	margin-top: 20px;
+	overflow: auto;
+	margin-left: 3%;
+	word-wrap: break-word;
+	background-color: #ffffff;
+	resize: none;
+	height: 95%;
+	width: 100%;
+}
+
+#rule-preview {
+	margin-top: 20px;
+	margin-right: 3%;
+	float: right;
+	height: 97%;
+	width: 47%;
+	height: 1000px;
+	background-color: #ffffff;
+}
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	{{ template "head.html" .}}
+	<body>
+		<header>
+			{{- template "nav.html" .}}
+		</header>
+		<div class="container">
+			
+			<div id="modal1" class="modal">
+				<div class="modal-content">
+					<h4 id="modal-title"></h4>
+					<p id="modal-point"></p>
+					<p id="modal-description">
+					</p>
+					<input type="text" id="input-flag" name="flag" placeholder="flag">
+					<input type="hidden" id="input-taskid" name="id" value="">
+					<input type="hidden" id="csrf_token" value="{{ .csrf_token }}">
+					<input class="task-btn btn" type="button" value="Submit" onclick="javascript:submitFlag()">
+					<p id="msg"></p>
+				</div>
+			</div>
+				
+		</div>
+		<script>
+		 $(window).load(function(){
+			 $.when(
+				 $.get('/api/v1/genres', function(json) {
+					 if (json.status == 200) {
+						 genres = json.data;
+						 $.each(genres, function(i){
+							 var genre = genres[i];
+							 var divGenre = $('<div>').addClass(genre.name+'-tasks').addClass('hide');
+							 $('<h5>').text(genre.name).appendTo(divGenre);
+							 var divRow = $('<div>').addClass('row')
+							 $('<ul>').appendTo(divRow);
+							 divRow.appendTo(divGenre);
+							 $('.container').append(divGenre);
+						 });
+					 }
+				 })
+			 ).done(function(){
+				 $.get('/api/v1/tasks', function(json) {
+					 if (json.status == 200) {
+						 tasks = json.data;
+						 $.each(tasks, function(i) {
+							 task = tasks[i];
+							 liTask = $('<li>');
+							 var divTask = $('<div>').addClass('col s3 grid-tasks').
+													  css('background-color', task.color);
+							 divTask.attr('id', 'task'+task.id);
+							 var p = $('<p>');
+							 title = $('<span>');
+							 if (task.is_solved == true) {
+								 $('<i>').addClass('material-icons').css('position', 'absolute').css('margin-left', '-5%').text('done').appendTo(p);
+							 } else {
+								 $('<i>').css('position', 'absolute').css('margin-left', '-5%').text(task.solved_by).appendTo(p);
+							 }
+							 title.addClass('title').text(task.title).appendTo(p);
+							 $('<br>').appendTo(p);
+							 $('<span>').addClass('point').text(task.point + 'pt').appendTo(p);
+							 $('<br>').appendTo(p);
+							 p.appendTo(divTask);
+							 divTask.appendTo(liTask);
+
+							 $('.'+task.genre+'-tasks').removeClass('hide');
+							 $('.'+task.genre+'-tasks div ul').append(liTask);
+							 
+						 });
+					 }
+				 })	 
+			 });
+			 
+			 $('#modal1').modal();
+			 
+			 $(document).on('click', '.grid-tasks', function () {
+				 var id = $(this).attr('id').replace(/[^-^0-9^'.]/g, '');
+				 var url = '/api/v1/tasks/' + id;
+
+				 $('#input-flag').prop('disabled', false);
+				 $('#input-flag').val('');
+				 $('#msg').text('');
+				 
+				 $.get(url, function(json) {
+					 
+					 if (json.status == 200) {
+						 var task = json.data;
+						 $('#modal-title').text(task.title);
+						 $('#modal-point').text(task.point + 'pt');
+						 $('#modal-description').html(task.description);
+						 $('#input-taskid').attr('value', task.id);
+						 if(task.is_solved == true) {
+							 $('#input-flag').prop('disabled', true);
+							 $('#msg').text('Already solved');
+						 }
+						 $('#modal1').modal('open');
+					 }
+				 });
+			 });
+		 });
+		</script>	 
+				
+			
+		{{template "body_common.html" .}}
+	</body>
+</html>

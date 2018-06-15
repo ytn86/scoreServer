@@ -1,0 +1,44 @@
+{{ set . "title" "Home" }}
+<!DOCTYPE HTML>
+<html>	
+	{{  template "head.html" .}}
+	<body>
+		<header>
+			{{ template "nav.html" . }}
+		</header>
+
+		<div class="container">
+			<h5> Register </h5>
+
+			<div class="row">
+				<form id="form-register" class="col s12">
+					<div class="input-field col s6">
+						<input type="text" id="input-username" name="username">
+						<label for="username">Username</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="email" id="input-email" class="validate" name="email">
+						<label for="email">Email</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="password" id="input-password" name="password">
+						<label for="password">Password</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="password" id="input-password2" name="password2">
+						<label for="password2">Re assword</label>
+					</div>
+					<p>
+						<input type="checkbox" id="input-is_itf" name="is_itf" value="0">
+						<label for="input-is_itf">I'm a student of Univ. Tsukuba</label>
+					</p>
+					<input type="hidden" id="csrf_token" value="{{ .csrf_token }}"> 
+					<input class="right btn" type="button" value="login" onclick="doRegister();">
+				</form>
+				<p id="msg"></p>
+			</div>
+		</div>
+		
+		{{ template "body_common.html" .}}
+	</body>
+</html>

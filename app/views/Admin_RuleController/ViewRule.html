@@ -1,0 +1,57 @@
+{{ set . "title" "Home" }}
+<!DOCTYPE HTML>
+<html>	
+	{{  template "head.html" .}}
+	<body>
+		<header>
+			{{ template "nav.html" . }}
+		</header>
+		
+		<div>
+			<div id="rule">
+				<div id="tabs-markdown">
+					<textarea id="input-rule-markdown"></textarea>
+				</div>
+				<div id="tabs-html">
+					<textarea id="input-rule-html"></textarea>
+				</div>
+
+				<div class="col s4">
+					<ul id="tabs-rule" class="tabs">
+						<li class="tab"><a href="#tabs-markdown">Markdown</a></li>
+						<li class="tab"><a href="#tabs-html">HTML</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="rule-preview">
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+		<script>
+
+		 $(document).ready(function() {
+			 $('.sliderone').slider('pause');
+			 $('ul.tabs').tabs();
+		 });
+		 
+		 $(function(){
+			 $('#input-rule-markdown').keyup(function() {
+				 var html = marked($('#input-rule-markdown').val());
+				 $('#input-rule-html').val(html)
+				 $('#rule-preview').html(html);
+			 })
+
+			 $('#input-rule-html').keyup(function() {
+				 var html = $('#input-rule-html').val();
+				 $('#rule-preview').html(html);
+			 })
+		 })
+		 
+				 
+
+		</script>
+			
+		{{ template "body_common.html" .}}
+	</body>
+</html>

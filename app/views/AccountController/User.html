@@ -1,0 +1,186 @@
+{{ set . "title" "Home" }}
+<!DOCTYPE HTML>
+<html>	
+	{{  template "head.html" .}}
+	<body>
+		<header>
+			{{ template "nav.html" . }}
+		</header>
+		{{ template "body_common.html" .}}
+
+		<div class="container">
+			<div class="row">
+				<h5>Profile</h5>
+				<div id="profile">
+					<div class="col s8">
+						<div class="col s4">Username</div>
+						<div id="username" class="col s4"></div>
+					</div>
+					<div class="col s8">
+						<div class="col s4">Email</div>
+						<div id="email" class="col s4"></div>
+					</div>
+					<div class="col s8">
+						<div class="col s4">Univ. Tsukuba?</div>
+						<div id="is_itf" class="col s4"></div>
+					</div>
+					<div class="col s8">
+						<div class="col s4">Score</div>
+						<div id="score" class="col s4"></div>
+					</div>
+					<div class="col s8">
+						<div class="col s4">Comment</div>
+						<div id="comment" class="col s6"></div>
+					</div>
+					<button id="button-modifyUser" class="waves-effect waves-light btn right">Modify</button>
+				</div>
+			</div>
+			<div class="row">
+				<h5>You Solved</h5>
+				<table id="table-solves" class="bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Point</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody id="table-solves-body">
+					</tbody>
+				</table>
+			</div>
+			<div id="modal1" class="modal">
+				<div class="modal-content">
+					<h4>Modify Profile</h4>
+					<div class="row">
+						<div class="input-field">
+							<input type="text" id="input-username" name="username">
+							<label class="active" for="input-username">Username</label>
+						</div>
+						<div class="input-field">
+							<input type="email" id="input-email" class="validate" name="email">
+							<label for="input-email">Email</label>
+						</div>
+						<div class="input-field">
+							<input type="password" id="input-password" name="password">
+							<label for="input-password">Password</label>
+						</div>
+						<div class="input-field">
+							<input type="password" id="input-newpassword" name="newpassword">
+							<label for="input-newpassword">New Password</label>
+						</div>
+						<div class="input-field">
+							<input type="password" id="input-newpassword2" name="newpassword2">
+							<label for="input-newpassword2">Re-Enter New Password</label>
+						</div>
+						<div class="input-field">
+							<textarea id="input-comment" class="materialize-textarea" name="comment"></textarea>
+							<label for="input-comment">Comments</label>
+						</div>
+						<div class="input-field">
+							<input type="checkbox" id="input-is_itf" name="is_itf">
+							<label for="input-is_itf">Univ. Tsukuba?</label>
+						</div>
+						<input type="hidden" id="csrf_token" value="{{ .csrf_token }}">							
+						<input type="submit" class="waves-effect waves-light btn right" onclick="javascript:modifyUserProfile();" value="Modify">
+						<p id="msg"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+		 $(window).load(function(){
+			 $("#modal1").modal();
+
+			 $(document).on('click', '#button-modifyUser', function() {
+				 $('#modal1').modal('open');
+			 });
+
+
+			 var url1 = '/api/v1/user/solves';
+			 var url2 = '/api/v1/user/profile';
+			 			 
+			 
+			 $.get(url1, function(json) {
+				 if (json["status"] == 200) {
+					 var list = json["data"]
+					 if (list != null) {
+						 $.each(list, function(i) {
+							 var item = list[i];
+							 var tr = $('<tr>');
+							 $('<td>').text(item.taskid).appendTo(tr);
+							 $('<td>').text(item.title).appendTo(tr);
+							 $('<td>').text(item.point).appendTo(tr);
+							 $('<td>').text(dateToString(item.solved_at)).appendTo(tr);
+							 $('#table-solves-body').append(tr);
+						 })
+					 }
+				 }
+			 });
+
+
+
+			 $.get(url2, function(json) {
+				 if (json["status"] == 200) {
+					 var profile = json["data"];
+					 $('#username').text(profile.name);
+					 $('#email').text(profile.email);
+					 if (profile.is_itf == true) {
+						 $('#is_itf').text('yes');
+					 } else {
+					 $('#is_itf').text('no');
+					 }
+					 $('#score').text(profile.score + ' pt');
+					 $('#comment').text(profile.comment);
+					 
+					 
+					 $('#input-username').val(profile.name);
+					 $('#input-email').val(profile.email);
+					 if (profile.is_itf == true) {
+					 $('#input-is_itf').prop('checked', true);
+					 } else {
+						 $('#input-is_itf').prop('checked', false);
+					 }
+					 $('#input-comment').text(profile.comment);
+				 }
+			 }).done(function(){
+				 Materialize.updateTextFields();
+			 });
+		 })
+		 
+		 function modifyUserProfile() {
+			 
+			 var json = {
+				 username: $('#input-username').val(),
+				 email: $('#input-email').val(),
+				 password: $('#input-password').val(),
+				 newpassword: $('#input-newpassword').val(),
+				 newpassword2: $('#input-newpassword2').val(),
+				 is_itf: $('#input-is_itf').prop('checked'),
+				 comment: $('#input-comment').val()
+			 };
+
+			 $.ajax({
+				 url: '/api/v1/user/profile',
+				 headers: {
+					 'X-CSRF-Token': $('#csrf_token').val(),
+				 },
+				 data: JSON.stringify(json),
+				 contentType: 'application/json; charset=UTF-8',
+				 type: 'PATCH'
+			 }).done(function(data){
+				 $('#msg').text(data.msg);
+				 if (data.status == 200) {
+					 setTimeout(function() {
+						 location.reload();
+					 }, 1000);
+				 }
+			 }).fail(function(data){
+				 $('#msg').text(data.responseJSON.msg);
+			 });
+		 }
+				 
+		</script>
+	</body>
+</html>

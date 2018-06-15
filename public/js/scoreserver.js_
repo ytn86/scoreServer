@@ -1,0 +1,60 @@
+function getAllTasks() {
+
+	genres = getAllGenres()
+
+	var xhr = new XMLHttpRequest();
+	
+	for (var genre in genres) {
+
+		var url = '/api/v1/tasks/gid' + genre.id;
+		xhr.open('GET', url);
+		xhr.send(null);
+
+		var tasks = JSON.parse(xhr.responseText);
+
+		var div = document.CreateElement('div');
+		div.class = genre.name + "-tasks";
+		var div2 = document.CreateElement('div');
+		div2.class = "row";
+		div.appendChild(div2);
+		
+		for (var task in tasks) {
+			
+		
+		}
+	}
+}
+
+function getAllGenres() {
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', '/api/v1/genres');
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			var jsonData =  JSON.parse(xhr.responseText);
+			if (jsonData["status"] != 200) {
+				return null
+			}		
+			return jsonData["data"];
+		}
+	}
+	xhr.send(null);
+}
+
+function submitFlag(taskid) {
+
+	var formInfo = new FormData(document.getElementById(taskid));	
+
+	var flag = formInfo.get("flag");
+	var id = formInfo.get("id");
+
+	var url = '/api/v1/tasks/' + id.toString() + '/submit'
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', url);
+	xhr.send({id: id, flag: flag})
+
+	console.log({id: id, flag: flag})
+
+}

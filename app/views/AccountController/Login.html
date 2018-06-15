@@ -1,0 +1,34 @@
+{{ set . "title" "Home" }}
+<!DOCTYPE HTML>
+<html>	
+	{{  template "head.html" .}}
+	<body>
+		<header>
+			{{ template "nav.html" . }}
+		</header>
+
+		<div class="container">
+			
+				<h5>Login</h5>
+				<div class="row login-form">
+					<form id="form-login">
+						<div class="input-field col s4">
+							<input type="text" id="username" name="username">
+							<label for="username">Username</label>
+						</div>
+						<div class="input-field col s4">
+							<input type="password" id="password" name="password">
+							<label for="password">Password</label>
+						</div>
+						<input type="hidden" id="csrf_token" value="{{ .csrf_token }}">
+						<input class="btn" type="button" value="Login" onclick="doLogin();">
+					</form>
+				</div>
+				<p id="msg"></p>
+			</div>
+		</div>
+		
+		
+		{{ template "body_common.html" .}}
+	</body>
+</html>

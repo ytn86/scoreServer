@@ -1,0 +1,15 @@
+{{ define "index" }}
+<!DOCTYPE HTML>
+<html>	
+	{{  template "head" .}}
+	<body>
+		<header>
+			{{ template "nav-bar" . }}
+		</header>
+		{{ template "body-common" .}}
+	</body>
+</html>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script> 
+{{ end }}

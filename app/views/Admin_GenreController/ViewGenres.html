@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	{{ template "head.html" .}}
+	<body>
+		<header>
+			{{- template "nav.html" .}}
+		</header>
+		<div class="container">
+			<h5>Genres</h5>
+			<button id="button-addGenre" class="waves-effect waves-light btn right">Add Genre</button>
+			<table class="bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Color</th>
+					</tr>
+				</thead>
+				<tbody id="table-genres-body">
+				</tbody>
+			</table>
+			
+			<div id="modal1" class="modal">
+				<h5></h5>
+				<div class="modal-content">
+					<div class="row">
+						<form id="form-genre" class="form-task">
+							<div class="input-field">
+								<input placeholder="name" type="text" id="input-name" name="name">
+								<label for="input-name">Name</label>
+							</div>
+							<div class="input-field">
+								<input placeholder="color" type="text" id="input-color" name="color">
+								<label for="input-color">Color</label>
+							</div>
+							<input type="hidden" id="csrf_token" value="{{ .csrf_token }}">
+							<div class="input-field">
+								<input type="hidden" id="input-genreid" name="id">
+								<input id="input-btn" class="task-btn btn" type="button" value="Submit">
+							</div>
+						</form>
+					</div>
+					<p id="msg"></p>
+				</div>
+			</div>
+		</div>
+		<script>
+		 $(function(){
+			 $.get('/api/v1/genres', function(json) {
+				 if (json.status == 200) {
+					 genres = json.data;
+					 $.each(genres, function(i) {
+						 genre = genres[i];
+						 var trGenre = $('<tr>').attr('id', 'genre'+genre.id).css('background-color', genre.color);
+						 $('<td>').addClass('genre-id').text(genre.id).appendTo(trGenre);
+						 $('<td>').addClass('genre-name').text(genre.name).appendTo(trGenre);
+						 $('<td>').addClass('genre-color').text(genre.color).appendTo(trGenre);
+						 $('#table-genres-body').append(trGenre);
+					 });
+				 }
+			 });
+
+			 
+			 $('#modal1').modal();
+
+			 $(document).ready(function() {
+				 $('select').material_select();
+			 });
+
+			 $(document).on('click', '#table-genres-body tr', function () {
+				 var id = $(this).attr('id').replace(/[^-^0-9^'.]/g, '');
+
+				 $('#modal1 h5').text('Modify Genre');
+
+				 console.log($(this).find('.genre-name').text());
+
+				 
+				 $('#input-genreid').val($(this).find('.genre-id').text());
+				 $('#input-name').val($(this).find('.genre-name').text());
+				 $('#input-color').val($(this).find('.genre-color').text());
+
+				 $('#input-btn').attr('onclick', 'javascript:modifyGenre()');
+				 $('#modal1').modal('open');
+			 });
+
+			 $(document).on('click', '#button-addGenre', function () {
+				 
+				 $('#form-genre').trigger('reset');
+				 $('#modal1 h5').text('Add Genre');
+			 	 $('#input-btn').attr('onclick', 'javascript:addGenre()');
+				 $('#modal1').modal('open');
+			 });
+		 });
+
+		 function modifyGenre() {
+
+			 var json = {
+				 name: $('#input-name').val(),
+				 color: $('#input-color').val()
+			 };
+
+			 var id = $('#input-genreid').val();
+		
+			 $.ajax({
+				 url: '/api/v1/admin/genres/' + id,
+				 headers: {
+					 'X-CSRF-Token': $('#csrf_token').val(),
+				 },
+				 data: JSON.stringify(json),
+				 contentType: 'applicaton/json; charset=UTF-8',
+				 type: 'PATCH',
+			 }).done(function(data) {
+				 $('#msg').text(data.msg);
+
+				 if (data.msg == "success") {
+					 setTimeout(function() {
+						 $('#modal1').modal('close');
+					 }, 1000);
+				 }
+			 }).fail(function(data) {
+				 $('#msg').text(data.responseJSON.msg);
+			 })
+		 }
+		 
+		 
+		 function addGenre() {
+
+			 var json = {
+				 name: $('#input-name').val(),
+				 color: $('#input-color').val()
+			 };
+			 
+			 
+			 var id = $('#input-genreid').val();
+		
+			 $.ajax({
+				 url: '/api/v1/admin/genres',
+				 data: JSON.stringify(json),
+				  headers: {
+					 'X-CSRF-Token': $('#csrf_token').val(),
+				  },
+				 contentType: 'applicaton/json; charset=UTF-8',
+				 type: 'PUT',
+			 }).then(function(data) {
+				 $('#msg').text(data.msg);
+				 if (data.msg == "success") {
+					 setTimeout(function() {
+						 $('#modal1').modal('close');
+					 }, 1000);
+				 }
+			 }).fail(function(data) {
+				 $('#msg').text(data.responseJSON.msg);
+			 });
+		 }		 
+
+		</script>	 
+		{{template "body_common.html" .}}
+	</body>
+</html>

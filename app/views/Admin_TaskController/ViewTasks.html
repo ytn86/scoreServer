@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	{{ template "head.html" .}}
+	<body>
+		<header>
+			{{- template "nav.html" .}}
+		</header>
+		<div class="container">
+			<h5>Tasks</h5>
+			<button id="button-addTask" class="waves-effect waves-light btn right">Add Task</button>
+			<table class="bordered centered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Title</th>
+						<th>Genre</th>
+						<th>Point</th>
+						<th>Solved By</th>
+						<th>Available</th>
+					</tr>
+				</thead>
+				<tbody id="table-tasks-body">
+				</tbody>
+			</table>
+			
+			<div id="modal1" class="modal">
+				<h5></h5>
+				<div class="modal-content">
+					<div class="row">
+						<form id="form-task" class="form-task">
+							<div class="input-field">
+								<input placeholder="title" type="text" id="input-title" name="title">
+								<label for="input-title">Title</label>
+							</div>
+							<label>Genre</label>
+							<select id="select-genre" name="genreid" class="browser-default">
+								<option value="" disabled>chose..</option>
+							</select>
+							
+
+							<div class="input-field">
+								<input placeholder="point" type="text" id="input-point" name="point">
+								<label for="input-point">Point</label>
+							</div>
+							<div class="input-field">
+								<textarea placeholder="description" id="input-description" class="materialize-textarea" name="description" ></textarea>
+								<label for="input-description">Description</label>
+							</div>
+							<div class="input-field">
+								<input placeholder="flag" type="text" id="input-flag" name="flag">
+								<label for="input-flag">Flag</label>
+							</div>
+							<div class="input-field">
+								<input type="checkbox" id="input-is_available" name="is_available">
+								<label for="input-is_available">IsAvailable?</label>
+							</div>
+							<input type="hidden" id="csrf_token" value="{{ .csrf_token }}">
+							<div class="input-field">
+								<input type="hidden" id="input-taskid" name="id">
+								<input id="input-btn" class="task-btn btn" type="button" value="Submit" onclick="">
+							</div>
+
+							
+						</form>
+					</div>
+					<p id="msg"></p>
+				</div>
+			</div>
+				
+		</div>
+		<script>
+
+		 $(window).load(function(){
+			 $.get('/api/v1/admin/tasks', function(json) {
+				 if (json.status == 200) {
+					 tasks = json.data;
+					 $.each(tasks, function(i) {
+						 task = tasks[i];
+						 var trTask = $('<tr>').attr('id', 'task'+task.id);
+						 $('<td>').addClass('task-id').text(task.id).appendTo(trTask);
+						 $('<td>').addClass('task-title').text(task.title).appendTo(trTask);
+						 $('<td>').addClass('task-genre').text(task.genre).appendTo(trTask);
+						 $('<td>').addClass('task-point').text(task.point).appendTo(trTask);
+						 $('<td>').addClass('task-solved_by').text(task.solved_by).appendTo(trTask);
+						 
+						 if (task.is_available == true) {
+							 $('<td>').addClass('task-is_available').text('yes').appendTo(trTask);
+						 } else {
+							 $('<td>').addClass('task-is_available').text('no').appendTo(trTask);
+						 }
+						 $('#table-tasks-body').append(trTask);
+					 });
+				 }
+			 });
+
+			 $.get('/api/v1/genres', function(json) {
+				 if (json.status == 200) {
+					 var genres = json.data;
+
+					 $.each(genres, function(i) {
+						 var genre = genres[i];
+						 var opt = $('<option>').attr('value', genre.id.toString()).text(genre.name);
+						 $('#select-genre').append(opt);
+					 });
+				 }
+			 });
+				 
+			 
+			 $('#modal1').modal();
+
+			 $(document).ready(function() {
+				 $('select').material_select();
+			 });
+
+			 
+			 $(document).on('click', '#table-tasks-body tr', function () {
+				 var id = $(this).attr('id').replace(/[^-^0-9^'.]/g, '');
+				 var url = '/api/v1/admin/tasks/' + id;
+				 $.get(url, function(json) {
+					 
+					 if (json.status == 200) {
+						 var task = json.data;
+						 $('#input-title').val(task.title);
+						 $('#select-genre').val(task.genreid);
+						 $('#input-point').val(task.point);
+						 $('#input-description').val(task.description);
+						 $('#input-flag').val(task.flag);
+						 $('#input-taskid').val(task.id);
+						 $('#input-is_available').prop('checked', task.is_available);
+						 
+						 $('#modal1 h5').text('Modify Task');
+						 $('#input-btn').attr('onclick', 'javascript:modifyTask()');
+						 $('#modal1').modal('open');
+					 }
+				 });
+			 });
+			 $(document).on('click', '#button-addTask', function () {
+				 
+				 $('#form-task').trigger('reset');
+				 $('#modal1 h5').text('Add Task');
+			 	 $('#input-btn').attr('onclick', 'javascript:addTask()');
+				 $('#modal1').modal('open');
+			 });
+		 });
+
+
+		 function modifyTask() {
+
+			 var json = {
+				 title: $('#input-title').val(),
+				 genreid: parseInt($('#select-genre').val()),
+				 point: parseInt($('#input-point').val()),
+				 description: $('#input-description').val(),
+				 flag: $('#input-flag').val(),
+				 is_available: $('#input-is_available').prop('checked'),
+			 };
+
+			 
+			 var id = $('#input-taskid').val();
+
+			 $.ajax({
+				 url: '/api/v1/admin/tasks/' + id,
+				 headers: {
+					 'X-CSRF-Token': $('#csrf_token').val(),
+				 },
+				 data: JSON.stringify(json),
+				 contentType: 'applicaton/json; charset=UTF-8',
+				 type: 'PATCH',
+
+			 }).done(function(data) {
+				 $('#msg').text(data.msg);
+				 if (data.msg=="success") {
+					 setTimeout(function(){
+						 location.reload();
+					 }, 1000);
+				 }
+			 }).fail(function(data) { 
+				 $('#msg').text(data.responseJSONmsg);
+			 })								 
+		 }
+		 
+
+		 function addTask() {
+
+			 var json = {
+				 title: $('#input-title').val(),
+				 genreid: parseInt($('#select-genre').val()),
+				 point: parseInt($('#input-point').val()),
+				 description: $('#input-description').val(),
+				 flag: $('#input-flag').val(),
+				 is_available: $('#input-is_available').prop('checked'),
+			 };
+			 
+			 $.ajax({
+				 url: '/api/v1/admin/tasks',
+				 headers: {
+					 'X-CSRF-Token': $('#csrf_token').val(),
+				 },
+				 data: JSON.stringify(json),
+				 contentType: 'applicaton/json; charset=UTF-8',
+				 type: 'PUT',
+			 }).done(function(data) {
+				 $('#msg').text(data.msg);
+				 if (data.msg == "success"){
+					 setTimeout(function(){
+						 location.reload();
+					 }, 1000);
+				 }
+			 }).fail(function(data) { 
+				 $('#msg').text(data.responseJSON.msg);
+			 })
+			 
+		 }
+		</script>	 
+		{{template "body_common.html" .}}
+	</body>
+</html>
+

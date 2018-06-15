@@ -1,0 +1,86 @@
+# Routes Config
+#
+# This file defines all application routes (Higher priority routes first)
+#
+
+module:testrunner
+# module:jobs
+
+
+GET     /                                       App.Index
+
+# Tasks
+GET		/tasks									TaskController.ViewTasks
+
+# Scores
+GET		/scores									ScoreController.ViewTop100Users
+
+
+
+# Rule
+GET		/rule									RuleController.GetRule
+
+
+
+# Account
+
+GET		/register								AccountController.Register
+GET		/login									AccountController.Login
+GET		/logout									AccountController.Logout
+GET		/user									AccountController.User
+
+
+
+# Admin
+GET		/admin/tasks							Admin_TaskController.ViewTasks
+GET		/admin/genres							Admin_GenreController.ViewGenres
+
+# API
+GET		/api/v1/tasks							APIv1TaskController.GetAllAvailableTasksInfo
+GET		/api/v1/tasks/:taskID					APIv1TaskController.GetAvailableTaskInfo
+POST	/api/v1/tasks/:taskID/submit			APIv1TaskController.SubmitFlag
+
+GET		/api/v1/tasks/gid/:genreID				APIv1TaskController.GetAvailableTasksInfoFilterByGenreID
+GET		/api/v1/genres							APIv1GenreController.GetAllGenresInfo
+GET		/api/v1/user/solves						APIv1AccountController.GetUserSolves
+GET		/api/v1/user/solves/:userID				APIv1AccountController.GetUserSolvesByID
+GET		/api/v1/user/profile/:userID			APIv1AccountController.GetUserProfileByID
+GET		/api/v1/user/profile					APIv1AccountController.GetUserProfile
+PATCH	/api/v1/user/profile					APIv1AccountController.ModifyUserProfile
+
+
+GET		/api/v1/scores							APIv1ScoreController.GetTop100Users
+
+
+
+POST	/api/v1/register						APIv1AccountController.DoRegister
+POST	/api/v1/login							APIv1AccountController.DoLogin
+
+
+
+# Admin API
+# GET		/api/v1/admin/tasks/gid/:genreID	Admin_APIv1TaskController.GetTasksInfoFilterByGenreID
+GET		/api/v1/admin/tasks/:taskID				Admin_APIv1TaskController.GetTaskInfo
+GET		/api/v1/admin/tasks						Admin_APIv1TaskController.GetAllTasksInfo
+
+PUT		/api/v1/admin/tasks						Admin_APIv1TaskController.AddTask
+PATCH	/api/v1/admin/tasks/:taskID				Admin_APIv1TaskController.ModifyTask
+
+PUT		/api/v1/admin/genres					Admin_APIv1GenreController.AddGenre
+PATCH	/api/v1/admin/genres/:genreID			Admin_APIv1GenreController.ModifyGenre
+
+
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/*filepath                       Static.Serve("public")
+
+
+
+# Catch all
+*       /:controller/:action                    :controller.:action
+
